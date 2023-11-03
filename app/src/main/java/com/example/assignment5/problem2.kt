@@ -3,13 +3,12 @@ package com.example.assignment5
 class problem2 {
     fun searchR(strings: Array<String>, str: String, first: Int, last: Int): Int {
         if (first > last) return -1
-
+        /* Move mid to the middle */
         var mid = (last + first) / 2
-
+        /* if mid is empty, find the closest non-empty string. */
         if (strings[mid].isEmpty()) {
             var left = mid - 1
             var right = mid + 1
-
             while (true) {
                 if (left < first && right > last) {
                     return -1
@@ -24,12 +23,12 @@ class problem2 {
                 left--
             }
         }
-
-        if (str == strings[mid]) {
+        /* Check for string, and recurse if necessary */
+        if (str == strings[mid]) { // Found it!
             return mid
-        } else if (str > strings[mid]) {
+        } else if (str > strings[mid]) { // Search right
             return searchR(strings, str, mid + 1, last)
-        } else {
+        } else { // Search left
             return searchR(strings, str, first, mid - 1)
         }
     }
